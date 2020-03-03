@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:context="http://www.springframework.org/schema/context" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation=" http://www.springframework.org/schema/beans  http://www.springframework.org/schema/beans/spring-beans-3.0.xsd http://www.springframework.org/schema/context  http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+    <context:component-scan base-package="com.library.management.system" />
+    <context:annotation-config />
+
+	<bean id="vehicleService" class="com.vehicle.management.system.service.VehicleServiceImpl">
+		
+	</bean>
+	<bean id="vehicleDao" class="com.vehicle.management.system.dao.VehicleDaoImpl">
+		<property name="fetchVehicle" value="Select * from vms.vehicles"></property>
+		<property name="fetchVehicleById" value="Select * from vms.vehicles where id = ?;"></property>
+		<property name="deleteVehicle" value="DELETE FROM vms.vehicles WHERE id = ?;"></property>
+		<property name="insertVehicle" value="INSERT INTO vms.vehicles (make, model, year)VALUES (?, ?, ?);"></property>
+		<property name="updateVehicle" value="UPDATE vms.vehicles SET model = ? WHERE id = ?"></property>
+	</bean>
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="datasource" />
+    </bean>
+    <bean id="datasource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+        <property name="url" value="jdbc:mysql://localhost/lms?serverTimezone=America/Chicago" />
+        <property name="username" value="root" />
+        <property name="password" value="Krishna2410$" />
+    </bean>
+</beans>
